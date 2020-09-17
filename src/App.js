@@ -1,24 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import HomeComponent from './cmp/home';
+import ListingComponent from './cmp/listing';
+import AboutComponent from './cmp/about';
+import Auth from './cmp/auth';
+import {BrowserRouter, Switch, Route }from 'react-router-dom';
+import Checker from './cmp/protected';
+import Nav from './cmp/nav'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+      <Nav></Nav>
+      <Switch>
+        <Route path="/about">
+          <Checker cmp={AboutComponent}></Checker>
+        </Route>
+        <Route path="/home">
+        <Checker cmp={HomeComponent}></Checker>
+        </Route>
+        <Route path="/list">
+        <Checker cmp={ListingComponent}></Checker>
+        </Route>
+        <Route path="/">
+        <Auth></Auth>
+        </Route>
+      </Switch>
+      </BrowserRouter>
     </div>
   );
 }
